@@ -21,15 +21,15 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-scm-publish-plugin-004-publish-scm</artifactId>
+  <artifactId>maven-scm-publish-plugin-002-publish-scm</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>maven-scm-publish-plugin-004-publish-scm</name>
+  <name>publish-scm site (without staging)</name>
   <url>http://people.apache.org/~bimargulies/site-test</url>
 
   <distributionManagement>
     <site>
-      <id>publish-scm-004</id>
+      <id>publish-scm-002</id>
       <url>scm:svn:${project.baseUri}/target/svn-root</url>
     </site>
   </distributionManagement>
@@ -46,9 +46,33 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-scm-publish-plugin</artifactId>
           <version>@project.version@</version>
+          <configuration>
+            <content>${project.reporting.outputDirectory}</content><!-- don't require site:stage -->
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
+    <!--plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>ln</id>
+            <phase>site</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <symlink link="${project.reporting.outputDirectory}/link" resource="target/link" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins-->
   </build>
 
   <reporting>
