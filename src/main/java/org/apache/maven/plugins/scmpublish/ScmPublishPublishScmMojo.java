@@ -27,6 +27,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -137,7 +140,17 @@ public class ScmPublishPublishScmMojo
             File file = new File( checkout, name );
             File source = new File( dir, name );
 
-            if ( source.isDirectory() )
+            if ( Files.isSymbolicLink( source.toPath() ) )
+            {
+                if ( !checkoutContent.contains( name ) )
+                {
+                    this.added.add( file );
+                }
+
+                // copy symbolic link (Java 7 only)
+                copySymLink( source, file );
+            }
+            else if ( source.isDirectory() )
             {
                 directories++;
                 if ( !checkoutContent.contains( name ) )
@@ -162,6 +175,20 @@ public class ScmPublishPublishScmMojo
                 copyFile( source, file );
             }
         }
+    }
+
+    /**
+     * Copy a symbolic link.
+     *
+     * @param srcFile the source file (expected to be a symbolic link)
+     * @param destFile the destination file (which will be a symbolic link)
+     * @throws IOException 
+     */
+    private void copySymLink( File srcFile, File destFile )
+        throws IOException
+    {
+        Files.copy( srcFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.COPY_ATTRIBUTES, LinkOption.NOFOLLOW_LINKS );
     }
 
     /**
