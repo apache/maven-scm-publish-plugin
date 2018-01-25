@@ -34,7 +34,6 @@ under the License.
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven SCM Publish Plugin</name>
-  <url>http://maven.apache.org/plugins/maven-scm-publish-plugin</url>
 
   <contributors>
     <contributor>
@@ -174,6 +173,14 @@ under the License.
         <filtering>true</filtering>
       </resource>
     </resources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
   <profiles>
