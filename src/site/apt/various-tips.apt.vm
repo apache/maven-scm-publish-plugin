@@ -73,15 +73,15 @@ Various tips for using this plugin
     </plugin>
 +----------------+
 
-  Initial creation of the branch has to be done manually, as a Git orphan branch:
+  <<Initial creation of the branch has to be done manually>>, as a Git orphan branch:
 
-  * <<<git checkout --orphan gh-pages>>> to create the branch locally,
+  1. <<<git checkout --orphan gh-pages>>> to create the branch locally,
 
-  * <<<rm .git/index ; git clean -fdx>>> to clean the branch content and let it empy,
+  2. <<<rm .git/index ; git clean -fdx>>> to clean the branch content and let it empy,
 
-  * copy an initial site content,
+  3. copy an initial site content,
 
-  * commit and push: <<<git add *>>>, <<<git commit -m "initial site content">>>, <<<git push>>>
+  4. commit and push: <<<git add *>>>, <<<git commit -m "initial site content">>>, <<<git push>>>
 
   []
 
