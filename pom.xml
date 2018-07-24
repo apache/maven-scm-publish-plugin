@@ -192,6 +192,9 @@ under the License.
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-invoker-plugin</artifactId>
             <configuration>
+              <debug>true</debug>
+              <showErrors>true</showErrors>
+              <streamLogs>true</streamLogs>
               <addTestClassPath>true</addTestClassPath>
               <pomExcludes>
                 <pomExclude>00*/pom.xml</pomExclude>
