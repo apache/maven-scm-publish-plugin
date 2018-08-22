@@ -199,6 +199,10 @@ under the License.
               <pomExcludes>
                 <pomExclude>00*/pom.xml</pomExclude>
               </pomExcludes>
+              <properties>
+                <!-- e.g. ensure that Java7 picks up TLSv1.2 when connecting with Central -->
+                <https.protocols>${https.protocols}</https.protocols>
+              </properties>
             </configuration>
           </plugin>
         </plugins>
