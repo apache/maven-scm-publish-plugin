@@ -63,7 +63,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <scmVersion>1.9.5</scmVersion>
+    <scmVersion>1.10.0</scmVersion>
     <mavenVersion>3.0</mavenVersion>
     <javaVersion>7</javaVersion>
 
