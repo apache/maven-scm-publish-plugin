@@ -29,6 +29,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,9 +88,10 @@ public class ScmPublishPublishScmMojo
      * @param dir             the content to put in scm (can be <code>null</code>)
      * @param doNotDeleteDirs directory names that should not be deleted from scm even if not in new content:
      *                        used for modules, which content is available only when staging
+     * @param baseDir         The base directory of the content
      * @throws IOException
      */
-    private void update( File checkout, File dir, List<String> doNotDeleteDirs )
+    private void update( File checkout, File dir, List<String> doNotDeleteDirs, File baseDir )
         throws IOException
     {
         String scmSpecificFilename = scmProvider.getScmSpecificFilename();
@@ -97,6 +99,7 @@ public class ScmPublishPublishScmMojo
                         ? checkout.list( new NotFileFilter( new NameFileFilter( scmSpecificFilename ) ) )
                         : checkout.list();
 
+        Path relativeDir = baseDir.toPath( ).toAbsolutePath( ).relativize( dir.toPath( ).toAbsolutePath( ) );
         Set<String> checkoutContent = new HashSet<String>( Arrays.asList( files ) );
         List<String> dirContent = ( dir != null ) ? Arrays.asList( dir.list() ) : Collections.<String>emptyList();
 
@@ -113,7 +116,8 @@ public class ScmPublishPublishScmMojo
 
         for ( String name : deleted )
         {
-            if ( ignoreDeleteMatchPatterns != null && ignoreDeleteMatchPatterns.matches( name, true ) )
+            String relativeName = relativeDir.resolve( name ).toString( );
+            if ( ignoreDeleteMatchPatterns != null && ignoreDeleteMatchPatterns.matches( relativeName, true ) )
             {
                 getLog().debug(
                     name + " match one of the patterns '" + pathsAsList + "': do not add to deleted files" );
@@ -130,7 +134,7 @@ public class ScmPublishPublishScmMojo
 
             if ( file.isDirectory() )
             {
-                update( file, null, null );
+                update( file, null, null, baseDir );
             }
             this.deleted.add( file );
         }
@@ -159,7 +163,7 @@ public class ScmPublishPublishScmMojo
                     file.mkdir();
                 }
 
-                update( file, source, null );
+                update( file, source, null , baseDir );
             }
             else
             {
@@ -279,7 +283,7 @@ public class ScmPublishPublishScmMojo
         try
         {
             logInfo( "Updating checkout directory with actual content in %s", content );
-            update( checkoutDirectory, content, ( project == null ) ? null : project.getModel().getModules() );
+            update( checkoutDirectory, content, ( project == null ) ? null : project.getModel().getModules(), content );
             String displaySize = org.apache.commons.io.FileUtils.byteCountToDisplaySize( size );
             logInfo( "Content consists of " + MessageUtils.buffer().strong( "%d directories and %d files = %s" ),
                      directories, files, displaySize );
