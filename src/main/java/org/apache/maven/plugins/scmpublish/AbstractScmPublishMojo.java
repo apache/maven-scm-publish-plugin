@@ -109,6 +109,12 @@ public abstract class AbstractScmPublishMojo
     private boolean dryRun;
 
     /**
+     * Set this to 'true' to skip site deployment.
+     */
+    @Parameter ( property = "scmpublish.skipDeploy", alias = "maven.site.deploy.skip", defaultValue = "false" )
+    private boolean skipDeployement;
+
+    /**
      * Run add and delete commands, but leave the actually checkin for the user to run manually.
      */
     @Parameter ( property = "scmpublish.skipCheckin" )
@@ -543,6 +549,12 @@ public abstract class AbstractScmPublishMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
+        if ( skipDeployement )
+        {
+            getLog().info( "scmpublish.skipDeploy = true: Skipping site deployment" );
+            return;
+        }
+
         // setup the scm plugin with help from release plugin utilities
         try
         {
