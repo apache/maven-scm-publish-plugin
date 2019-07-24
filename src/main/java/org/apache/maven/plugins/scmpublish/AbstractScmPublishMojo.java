@@ -103,6 +103,13 @@ public abstract class AbstractScmPublishMojo
     protected File checkoutDirectory;
 
     /**
+     * Location where the content is published inside the <code>${checkoutDirectory}</code>.
+     * By default, content is copyed at the root of <code>${checkoutDirectory}</code>.
+     */
+    @Parameter ( property = "scmpublish.subDirectory" )
+    protected String subDirectory;
+
+    /**
      * Display list of added, deleted, and changed files, but do not do any actual SCM operations.
      */
     @Parameter ( property = "scmpublish.dryRun" )

@@ -276,10 +276,34 @@ public class ScmPublishPublishScmMojo
 
         checkoutExisting();
 
+        final File updateDirectory;
+        if ( subDirectory == null )
+        {
+            updateDirectory = checkoutDirectory;
+        }
+        else
+        {
+            updateDirectory = new File( checkoutDirectory, subDirectory );
+
+            // Security check for subDirectory with .. inside
+            if ( !updateDirectory.toPath().normalize().startsWith( checkoutDirectory.toPath().normalize() ) )
+            {
+                logError( "Try to acces outside of the checkout directory with sub-directory: %s", subDirectory );
+                return;
+            }
+
+            if ( !updateDirectory.exists() )
+            {
+                updateDirectory.mkdirs();
+            }
+
+            logInfo( "Will copy content in sub-directory: %s", subDirectory );
+        }
+
         try
         {
             logInfo( "Updating checkout directory with actual content in %s", content );
-            update( checkoutDirectory, content, ( project == null ) ? null : project.getModel().getModules() );
+            update( updateDirectory, content, ( project == null ) ? null : project.getModel().getModules() );
             String displaySize = org.apache.commons.io.FileUtils.byteCountToDisplaySize( size );
             logInfo( "Content consists of " + MessageUtils.buffer().strong( "%d directories and %d files = %s" ),
                      directories, files, displaySize );
