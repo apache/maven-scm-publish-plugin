@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-plugins</artifactId>
-    <version>33</version>
+    <version>34</version>
     <relativePath/>
   </parent>
 
@@ -70,6 +70,7 @@ under the License.
     <!-- for documentation purpose -->
     <maven-scm-provider-svnjava-version>2.0.6</maven-scm-provider-svnjava-version>
     <svnkit-version>1.7.11</svnkit-version>
+    <project.build.outputTimestamp>2020-04-07T21:04:00Z</project.build.outputTimestamp>
   </properties>
   
   <prerequisites>
