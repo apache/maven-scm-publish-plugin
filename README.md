@@ -89,7 +89,7 @@ Additional Resources
 + [Apache Maven Twitter Account](https://twitter.com/ASFMavenProject)
 + #Maven IRC channel on freenode.org
 
-[jira]: https://issues.apache.org/jira/projects/MSCMPUBLISH/
+[jira]: https://issues.apache.org/jira/projects/MSCMPUB/
 [license]: https://www.apache.org/licenses/LICENSE-2.0
 [ml-list]: https://maven.apache.org/mailing-lists.html
 [code-style]: https://maven.apache.org/developers/conventions/code.html
