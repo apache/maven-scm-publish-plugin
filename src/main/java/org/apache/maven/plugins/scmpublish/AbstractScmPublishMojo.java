@@ -609,7 +609,7 @@ public abstract class AbstractScmPublishMojo
     /**
      * Check-in content from scm checkout.
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException in case of issue
      */
     protected void checkinFiles()
         throws MojoExecutionException
@@ -669,8 +669,8 @@ public abstract class AbstractScmPublishMojo
      * Add files to scm.
      *
      * @param added files to be added
-     * @throws MojoFailureException
-     * @throws MojoExecutionException
+     * @throws MojoFailureException in case of issue
+     * @throws MojoExecutionException in case of issue
      */
     protected void addFiles( Collection<File> added )
         throws MojoFailureException, MojoExecutionException

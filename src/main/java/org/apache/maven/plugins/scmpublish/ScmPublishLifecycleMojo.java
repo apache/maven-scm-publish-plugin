@@ -28,12 +28,13 @@ import org.apache.maven.plugin.MojoFailureException;
  * 
  * @goal scmpublish
  * @execute lifecycle="scmpublish" phase="scmpublish-publish"
- * @aggregate
+ * @aggregator
  */
 public class ScmPublishLifecycleMojo
     extends AbstractMojo
 {
 
+    @Override
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
