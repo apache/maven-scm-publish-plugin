@@ -174,14 +174,6 @@ under the License.
         <filtering>true</filtering>
       </resource>
     </resources>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 
   <profiles>

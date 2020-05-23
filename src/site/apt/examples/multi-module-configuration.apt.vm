@@ -43,7 +43,7 @@ mvn scm-publish:publish-scm
 
 * Avoiding Extra Path During Staging
 
-  When staging the site, sometimes extra directories appear between <<<target/staging>>> and the effective root of the site:
+  When staging the site, sometimes extra directories may appear between <<<target/staging>>> and the effective root of the site:
   this is caused by the auto-detection algorithm of site root, which cannot detect at which level to stop.
 
   This can be fixed by configuring the {{{/plugins/maven-site-plugin/stage-mojo.html#topSiteURL}site plugin's topSiteURL parameter}}

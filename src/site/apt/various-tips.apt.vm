@@ -59,7 +59,7 @@ Various tips for using this plugin
   <distributionManagement>
     <site>
       <id>site_id</id>
-      <url>scm:git:ssh://git@github.com/username/tomcat-foo-artifact.git</url><!-- or ${project.scm.developerConnection} -->
+      <url>${project.scm.developerConnection}</url><!-- or scm:git:ssh://git@github.com/username/tomcat-foo-artifact.git -->
     </site>
   </distributionManagement>
 ...
