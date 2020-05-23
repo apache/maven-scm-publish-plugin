@@ -166,15 +166,6 @@ under the License.
       <version>4.11</version>
     </dependency>
   </dependencies>
- 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
-  </build>
 
   <profiles>
     <profile>
@@ -186,9 +177,6 @@ under the License.
             <artifactId>maven-invoker-plugin</artifactId>
             <configuration>
               <addTestClassPath>true</addTestClassPath>
-              <pomExcludes>
-                <pomExclude>00*/pom.xml</pomExclude>
-              </pomExcludes>
             </configuration>
           </plugin>
         </plugins>
