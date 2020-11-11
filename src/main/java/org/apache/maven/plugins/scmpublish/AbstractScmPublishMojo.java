@@ -21,6 +21,7 @@ package org.apache.maven.plugins.scmpublish;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -512,9 +513,8 @@ public abstract class AbstractScmPublishMojo
         {
 
             // create a temporary directory for svnexec
-            baseDir = File.createTempFile( "scm", "tmp" );
-            baseDir.delete();
-            baseDir.mkdirs();
+            baseDir = Files.createTempDirectory( "scm" ).toFile();
+
             // to prevent fileSet cannot be empty
             ScmFileSet scmFileSet = new ScmFileSet( baseDir, new File( "" ) );
 
