@@ -26,11 +26,11 @@ under the License.
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-plugins</artifactId>
     <version>34</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <artifactId>maven-scm-publish-plugin</artifactId>
-  <version>3.1.0-SNAPSHOT</version>
+  <version>3.1.0</version>
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven SCM Publish Plugin</name>
@@ -45,7 +45,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-scm-publish-plugin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-scm-publish-plugin.git</developerConnection>
     <url>https://github.com/apache/maven-scm-publish-plugin/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
+    <tag>maven-scm-publish-plugin-3.1.0</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
@@ -70,7 +70,7 @@ under the License.
     <!-- for documentation purpose -->
     <maven-scm-provider-svnjava-version>2.0.6</maven-scm-provider-svnjava-version>
     <svnkit-version>1.7.11</svnkit-version>
-    <project.build.outputTimestamp>2020-04-07T21:04:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2020-12-23T07:12:18Z</project.build.outputTimestamp>
   </properties>
   
   <prerequisites>
