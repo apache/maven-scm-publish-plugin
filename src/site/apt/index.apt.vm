@@ -46,7 +46,7 @@ ${project.name}
     The plugin works from <<staged website>> by default (see {{{./publish-scm-mojo.html#content}<<<content>>> parameter}}).
 
     It first checks out the contents of a directory from
-    the SCM (see {{{./publish-scm-mojo.html#pubScmUrl}<<<pubSubUrl>>> parameter}}) into
+    the SCM (see {{{./publish-scm-mojo.html#pubScmUrl}<<<pubScmUrl>>> parameter}}) into
     <<<target/scmpublish-checkout>>> by default (see {{{./publish-scm-mojo.html#checkoutDirectory}<<<checkoutDirectory>>> parameter}}).
 
     Then locally staged content is applied to the check-out, issuing
