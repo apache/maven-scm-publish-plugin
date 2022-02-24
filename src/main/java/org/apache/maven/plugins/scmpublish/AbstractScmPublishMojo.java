@@ -62,6 +62,7 @@ import org.apache.maven.settings.crypto.SettingsDecryptionRequest;
 import org.apache.maven.settings.crypto.SettingsDecryptionResult;
 import org.apache.maven.shared.release.config.ReleaseDescriptor;
 import org.apache.maven.shared.release.config.ReleaseDescriptorBuilder;
+import org.apache.maven.shared.release.config.ReleaseUtils;
 import org.apache.maven.shared.release.scm.ScmRepositoryConfigurator;
 import org.apache.maven.shared.utils.logging.MessageUtils;
 
@@ -319,8 +320,8 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             logInfo("Performing a LOCAL checkout from " + scmUrl);
         }
 
-        ReleaseDescriptorBuilder descriptorBuilder = new ReleaseDescriptorBuilder();
-        descriptorBuilder.setInteractive(settings.isInteractiveMode());
+        ReleaseDescriptorBuilder releaseDescriptor = new ReleaseDescriptorBuilder();
+        releaseDescriptor.setInteractive(settings.isInteractiveMode());
 
         if (username == null || password == null) {
             for (Server server : settings.getServers()) {
@@ -346,12 +347,12 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             }
         }
 
-        descriptorBuilder.setScmPassword(password);
-        descriptorBuilder.setScmUsername(username);
+        releaseDescriptor.setScmPassword(password);
+        releaseDescriptor.setScmUsername(username);
 
-        descriptorBuilder.setWorkingDirectory(basedir.getAbsolutePath());
-        descriptorBuilder.setLocalCheckout(localCheckout);
-        descriptorBuilder.setScmSourceUrl(pubScmUrl);
+        releaseDescriptor.setWorkingDirectory(basedir.getAbsolutePath());
+        releaseDescriptor.setLocalCheckout(localCheckout);
+        releaseDescriptor.setScmSourceUrl(pubScmUrl);
 
         if (providerImplementations != null) {
             for (Map.Entry<String, String> providerEntry : providerImplementations.entrySet()) {
@@ -362,12 +363,12 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             }
         }
 
-        ReleaseDescriptor releaseDescriptor = descriptorBuilder.build();
-        scmRepository = scmRepositoryConfigurator.getConfiguredRepository(releaseDescriptor, settings);
+        ReleaseDescriptor descriptor = ReleaseUtils.buildReleaseDescriptor(releaseDescriptor);
+        scmRepository = scmRepositoryConfigurator.getConfiguredRepository(descriptor, settings);
 
         scmProvider = scmRepositoryConfigurator.getRepositoryProvider(scmRepository);
 
-        return releaseDescriptor;
+        return descriptor;
     }
 
     protected void checkoutExisting() throws MojoExecutionException {
