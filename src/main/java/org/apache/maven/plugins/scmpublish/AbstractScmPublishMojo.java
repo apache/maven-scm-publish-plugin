@@ -118,9 +118,18 @@ public abstract class AbstractScmPublishMojo
 
     /**
      * Set this to 'true' to skip site deployment.
+     *
+     * @deprecated Please use {@link #skipDeployment}.
+     */
+    @Deprecated
+    @Parameter ( defaultValue = "false" )
+    private boolean skipDeployement;
+
+    /**
+     * Set this to 'true' to skip site deployment.
      */
     @Parameter ( property = "scmpublish.skipDeploy", alias = "maven.site.deploy.skip", defaultValue = "false" )
-    private boolean skipDeployement;
+    private boolean skipDeployment;
 
     /**
      * Run add and delete commands, but leave the actually checkin for the user to run manually.
@@ -556,7 +565,7 @@ public abstract class AbstractScmPublishMojo
     public void execute()
         throws MojoExecutionException, MojoFailureException
     {
-        if ( skipDeployement )
+        if ( skipDeployment || skipDeployement )
         {
             getLog().info( "scmpublish.skipDeploy = true: Skipping site deployment" );
             return;
