@@ -176,7 +176,7 @@ public abstract class AbstractScmPublishMojo
      */
     @Component
     protected ScmRepositoryConfigurator scmRepositoryConfigurator;
-    
+
     /**
      * The serverId specified in the settings.xml, which should be used for the authentication.
      */
@@ -232,10 +232,10 @@ public abstract class AbstractScmPublishMojo
      */
     @Parameter( defaultValue = "${settings}", readonly = true, required = true )
     protected Settings settings;
-    
+
     @Component
     private SettingsDecrypter settingsDecrypter;
- 
+
 
     /**
      * Collections of paths not to delete when checking content to delete.
@@ -320,7 +320,7 @@ public abstract class AbstractScmPublishMojo
 
             String provider = ScmUrlUtils.getProvider( pubScmUrl );
             String delimiter = ScmUrlUtils.getDelimiter( pubScmUrl );
-            
+
             String providerPart = "scm:" + provider + delimiter;
 
             // X TODO: also check the information from releaseDescriptor.getScmRelativePathProjectDirectory()
@@ -592,9 +592,7 @@ public abstract class AbstractScmPublishMojo
             try
             {
                 tmpCheckout = true;
-                checkoutDirectory = File.createTempFile( "maven-scm-publish", ".checkout" );
-                checkoutDirectory.delete();
-                checkoutDirectory.mkdir();
+                checkoutDirectory = Files.createTempDirectory( "maven-scm-publish" + ".checkout" ).toFile();
             }
             catch ( IOException ioe )
             {
