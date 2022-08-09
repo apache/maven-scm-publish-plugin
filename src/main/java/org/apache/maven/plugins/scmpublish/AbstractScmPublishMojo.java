@@ -592,9 +592,7 @@ public abstract class AbstractScmPublishMojo
             try
             {
                 tmpCheckout = true;
-                checkoutDirectory = File.createTempFile( "maven-scm-publish", ".checkout" );
-                checkoutDirectory.delete();
-                checkoutDirectory.mkdir();
+                checkoutDirectory = Files.createTempDirectory("maven-scm-publish" + ".checkout").toFile();
             }
             catch ( IOException ioe )
             {
