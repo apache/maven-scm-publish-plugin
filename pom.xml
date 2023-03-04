@@ -65,7 +65,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <scmVersion>1.11.2</scmVersion>
+    <scmVersion>2.0.0-M3</scmVersion>
     <mavenVersion>3.2.5</mavenVersion>
     <javaVersion>8</javaVersion>
 
@@ -79,7 +79,23 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.release</groupId>
       <artifactId>maven-release-manager</artifactId>
-      <version>2.5.3</version>
+      <version>3.0.0-M7</version>
+    </dependency>
+    <!-- remove with maven-release-manager upgrade -->
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-core</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-common</artifactId>
+      <version>2.9.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.sshd</groupId>
+      <artifactId>sshd-osgi</artifactId>
+      <version>2.9.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -104,12 +120,18 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
       <artifactId>maven-shared-utils</artifactId>
-      <version>3.3.3</version>
+      <version>3.3.4</version>
+    </dependency>
+    <!-- remove with maven-shared-utils upgrade -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.11.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-      <version>3.1</version>
+      <version>3.12.0</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
