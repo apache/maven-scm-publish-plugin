@@ -299,7 +299,7 @@ public abstract class AbstractScmPublishMojo
     {
         if ( normalizeExtensions == null )
         {
-            normalizeExtensions = new HashSet<String>( Arrays.asList( NORMALIZE_EXTENSIONS ) );
+            normalizeExtensions = new HashSet<>( Arrays.asList( NORMALIZE_EXTENSIONS ) );
             if ( extraNormalizeExtensions != null )
             {
                 normalizeExtensions.addAll( Arrays.asList( extraNormalizeExtensions ) );
@@ -471,13 +471,7 @@ public abstract class AbstractScmPublishMojo
             }
             checkScmResult( scmResult, "check out from SCM" );
         }
-        catch ( ScmException e )
-        {
-            logError( e.getMessage() );
-
-            throw new MojoExecutionException( "An error occurred during the checkout process: " + e.getMessage(), e );
-        }
-        catch ( IOException e )
+        catch ( ScmException | IOException e )
         {
             logError( e.getMessage() );
 
@@ -538,11 +532,7 @@ public abstract class AbstractScmPublishMojo
                 FileUtils.deleteDirectory( checkoutDirectory );
             }
         }
-        catch ( IOException e )
-        {
-            throw new MojoExecutionException( e.getMessage(), e );
-        }
-        catch ( ScmException e )
+        catch ( IOException | ScmException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
@@ -576,11 +566,7 @@ public abstract class AbstractScmPublishMojo
         {
             setupScm();
         }
-        catch ( ScmRepositoryException e )
-        {
-            throw new MojoExecutionException( e.getMessage(), e );
-        }
-        catch ( NoSuchScmProviderException e )
+        catch ( ScmRepositoryException | NoSuchScmProviderException e )
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
@@ -653,7 +639,7 @@ public abstract class AbstractScmPublishMojo
             logInfo( "Deleting files is skipped." );
             return;
         }
-        List<File> deletedList = new ArrayList<File>();
+        List<File> deletedList = new ArrayList<>();
         for ( File f : deleted )
         {
             deletedList.add( relativize( checkoutDirectory, f ) );
@@ -682,9 +668,9 @@ public abstract class AbstractScmPublishMojo
     protected void addFiles( Collection<File> added )
         throws MojoFailureException, MojoExecutionException
     {
-        List<File> addedList = new ArrayList<File>();
-        Set<File> createdDirs = new HashSet<File>();
-        Set<File> dirsToAdd = new TreeSet<File>();
+        List<File> addedList = new ArrayList<>();
+        Set<File> createdDirs = new HashSet<>();
+        Set<File> dirsToAdd = new TreeSet<>();
 
         createdDirs.add( relativize( checkoutDirectory, checkoutDirectory ) );
 
@@ -731,7 +717,7 @@ public abstract class AbstractScmPublishMojo
         { // add all directories in one command
             try
             {
-                List<File> dirs = new ArrayList<File>( dirsToAdd );
+                List<File> dirs = new ArrayList<>( dirsToAdd );
                 ScmFileSet fileSet = new ScmFileSet( checkoutDirectory, dirs );
                 getLog().info( "scm add directories: " + dirs );
                 AddScmResult addDirResult = scmProvider.add( scmRepository, fileSet, "Adding directories" );
