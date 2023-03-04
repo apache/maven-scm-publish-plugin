@@ -21,8 +21,6 @@ package org.apache.maven.plugins.scmpublish;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -70,11 +68,11 @@ public class ScmPublishPublishScmMojo
     @Parameter( defaultValue = "${project}", readonly = true, required = true )
     protected MavenProject project;
 
-    private List<File> deleted = new ArrayList<File>();
+    private List<File> deleted = new ArrayList<>();
 
-    private List<File> added = new ArrayList<File>();
+    private List<File> added = new ArrayList<>();
 
-    private List<File> updated = new ArrayList<File>();
+    private List<File> updated = new ArrayList<>();
 
     private int directories = 0;
     private int files = 0;
@@ -97,14 +95,14 @@ public class ScmPublishPublishScmMojo
                         ? checkout.list( new NotFileFilter( new NameFileFilter( scmSpecificFilename ) ) )
                         : checkout.list();
 
-        Set<String> checkoutContent = new HashSet<String>( Arrays.asList( files ) );
-        List<String> dirContent = ( dir != null ) ? Arrays.asList( dir.list() ) : Collections.<String>emptyList();
+        Set<String> checkoutContent = new HashSet<>( Arrays.asList( files ) ) ;
+        List<String> dirContent = ( dir != null ) ? Arrays.asList( dir.list() ) : Collections.emptyList();
 
-        Set<String> deleted = new HashSet<String>( checkoutContent );
+        Set<String> deleted = new HashSet<>( checkoutContent );
         deleted.removeAll( dirContent );
 
         MatchPatterns ignoreDeleteMatchPatterns = null;
-        List<String> pathsAsList = new ArrayList<String>( 0 );
+        List<String> pathsAsList = new ArrayList<>( 0 );
         if ( ignorePathsToDelete != null && ignorePathsToDelete.length > 0 )
         {
             ignoreDeleteMatchPatterns = MatchPatterns.from( ignorePathsToDelete );
@@ -228,8 +226,10 @@ public class ScmPublishPublishScmMojo
         PrintWriter out = null;
         try
         {
-            in = new BufferedReader( new InputStreamReader( new FileInputStream( srcFile ), siteOutputEncoding ) );
-            out = new PrintWriter( new OutputStreamWriter( new FileOutputStream( destFile ), siteOutputEncoding ) );
+            in = new BufferedReader( new InputStreamReader( Files.newInputStream( srcFile.toPath() ),
+                    siteOutputEncoding ) );
+            out = new PrintWriter( new OutputStreamWriter( Files.newOutputStream( destFile.toPath() ),
+                    siteOutputEncoding ) );
 
             for ( String line = in.readLine(); line != null; line = in.readLine() )
             {
