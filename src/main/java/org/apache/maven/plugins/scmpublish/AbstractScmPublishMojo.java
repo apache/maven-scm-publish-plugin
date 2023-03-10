@@ -333,14 +333,18 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
                         // todo throw exception?
                     }
 
+                    final Server resultServer = decryptionResult.getServer();
+
                     if (username == null) {
-                        username = decryptionResult.getServer().getUsername();
+                        username = resultServer.getUsername();
                     }
 
                     if (password == null) {
-                        password = decryptionResult.getServer().getPassword();
+                        password = resultServer.getPassword();
                     }
 
+                    descriptorBuilder.setScmPrivateKey(resultServer.getPrivateKey());
+                    descriptorBuilder.setScmPrivateKeyPassPhrase(resultServer.getPassphrase());
                     break;
                 }
             }
