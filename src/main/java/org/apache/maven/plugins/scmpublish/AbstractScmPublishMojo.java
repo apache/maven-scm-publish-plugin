@@ -186,12 +186,36 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
 
     /**
      * The SCM username to use.
+     * <p>
+     * This parameter may act as <em>authentication token</em> when an <code>http(s)</code>
+     * site URL is used in conjunction with the <code>git</code> SCM provider,
+     * and no <code>password</code> parameter is provided.
+     * </p>
+     * Example:
+     * <pre>{@code
+     *   <site>
+     *     <id>your-site-id</id>
+     *     <url>scm:git:https://github.com/your-user/your-repo.git</url>
+     *   </site>
+     * }</pre>
      */
     @Parameter(property = "username")
     protected String username;
 
     /**
      * The SCM password to use.
+     * <p>
+     * This parameter may act as <em>authentication token</em> when an <code>http(s)</code>
+     * site URL is used in conjunction with the <code>jgit</code> SCM provider.
+     * Also, the <code>username</code> parameter must be a non-empty value (can be non-existing).
+     * </p>
+     * Example:
+     * <pre>{@code
+     *   <site>
+     *     <id>your-site-id</id>
+     *     <url>scm:jgit:https://github.com/your-user/your-repo.git</url>
+     *   </site>
+     * }</pre>
      */
     @Parameter(property = "password")
     protected String password;
