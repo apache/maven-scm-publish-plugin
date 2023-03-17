@@ -65,7 +65,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <scmVersion>2.0.0-M3</scmVersion>
+    <scmVersion>2.0.0</scmVersion>
     <mavenVersion>3.2.5</mavenVersion>
     <javaVersion>8</javaVersion>
 
