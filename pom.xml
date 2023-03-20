@@ -79,7 +79,7 @@ under the License.
     <dependency>
       <groupId>org.apache.maven.release</groupId>
       <artifactId>maven-release-manager</artifactId>
-      <version>3.0.0-M7</version>
+      <version>3.0.0</version>
     </dependency>
     <!-- remove with maven-release-manager upgrade -->
     <dependency>
