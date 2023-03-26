@@ -35,7 +35,7 @@ under the License.
     <menu name="Example">
       <item name="Maven Mono Module Configuration" href="examples/one-module-configuration.html"/>
       <item name="Maven Multi module Configuration" href="examples/multi-module-configuration.html"/>
-      <item name="Importing Maven sites" href="examples/importing-maven-site.html"/>
+      <item name="Importing Maven Sites" href="examples/importing-maven-site.html"/>
     </menu>
   </body>
 </project>

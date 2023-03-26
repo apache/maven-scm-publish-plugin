@@ -40,7 +40,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.3</version>
+          <version>@sitePluginVersion@</version>
           <configuration>
             <skipDeploy>true</skipDeploy>
           </configuration>
@@ -63,9 +63,6 @@
             <goals>
               <goal>stage</goal>
             </goals>
-            <configuration>
-              <skipDeploy>false</skipDeploy><!-- MSITE-652: configuration won't be necessary with m-site-p 3.2 -->
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -91,7 +88,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.4</version>
+        <version>@projectInfoReportsPluginVersion@</version>
         <configuration>
           <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
@@ -100,9 +97,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-        </configuration>
+        <version>@javadocPluginVersion@</version>
       </plugin>
     </plugins>
   </reporting>
