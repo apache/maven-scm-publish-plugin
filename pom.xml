@@ -68,7 +68,7 @@ under the License.
     <mavenVersion>3.2.5</mavenVersion>
     <javaVersion>8</javaVersion>
     <scmVersion>2.0.0</scmVersion>
-    <releasePluginVersion>3.0.0</releasePluginVersion>
+    <releasePluginVersion>3.0.1</releasePluginVersion>
     <sitePluginVersion>3.12.1</sitePluginVersion>
     <antrunPluginVersion>3.1.0</antrunPluginVersion>
     <projectInfoReportsPluginVersion>3.4.2</projectInfoReportsPluginVersion>
