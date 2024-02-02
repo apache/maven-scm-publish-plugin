@@ -187,6 +187,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
 
     /**
      * The SCM username to use.
+     * This value takes precedence over the username derived from {@link #serverId}.
      * @see #serverId
      */
     @Parameter(property = "username")
@@ -194,6 +195,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
 
     /**
      * The SCM password to use.
+     * This value takes precedence over the password derived from {@link #serverId}.
      * @see #serverId
      */
     @Parameter(property = "password")
