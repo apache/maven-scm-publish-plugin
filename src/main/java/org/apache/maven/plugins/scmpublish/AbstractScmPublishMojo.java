@@ -179,19 +179,22 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     protected ScmRepositoryConfigurator scmRepositoryConfigurator;
 
     /**
-     * The serverId specified in the settings.xml, which should be used for the authentication.
+     * The server id specified in the {@code settings.xml}, which should be used for the authentication.
+     * @see <a href="https://maven.apache.org/settings.html#servers">Settings Reference</a>
      */
-    @Parameter
+    @Parameter(property = "scmpublish.serverId", defaultValue = "${project.distributionManagement.site.id}")
     private String serverId;
 
     /**
      * The SCM username to use.
+     * @see #serverId
      */
     @Parameter(property = "username")
     protected String username;
 
     /**
      * The SCM password to use.
+     * @see #serverId
      */
     @Parameter(property = "password")
     protected String password;
