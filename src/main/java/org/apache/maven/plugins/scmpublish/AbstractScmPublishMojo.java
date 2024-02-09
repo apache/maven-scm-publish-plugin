@@ -54,12 +54,7 @@ import org.apache.maven.scm.provider.svn.AbstractSvnScmProvider;
 import org.apache.maven.scm.provider.svn.repository.SvnScmProviderRepository;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
-import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
-import org.apache.maven.settings.crypto.DefaultSettingsDecryptionRequest;
-import org.apache.maven.settings.crypto.SettingsDecrypter;
-import org.apache.maven.settings.crypto.SettingsDecryptionRequest;
-import org.apache.maven.settings.crypto.SettingsDecryptionResult;
 import org.apache.maven.shared.release.config.ReleaseDescriptor;
 import org.apache.maven.shared.release.config.ReleaseDescriptorBuilder;
 import org.apache.maven.shared.release.scm.ScmRepositoryConfigurator;
@@ -239,9 +234,6 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     @Parameter(defaultValue = "${settings}", readonly = true, required = true)
     protected Settings settings;
 
-    @Component
-    private SettingsDecrypter settingsDecrypter;
-
     /**
      * Collections of paths not to delete when checking content to delete.
      * If your site has subdirectories published by an other mechanism/build
@@ -306,7 +298,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         return FilenameUtils.isExtension(f.getName(), normalizeExtensions);
     }
 
-    private ReleaseDescriptor setupScm() throws ScmRepositoryException, NoSuchScmProviderException {
+    private void setupScm() throws ScmRepositoryException, NoSuchScmProviderException {
         String scmUrl;
         if (localCheckout) {
             // in the release phase we have to change the checkout URL
@@ -327,33 +319,10 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         ReleaseDescriptorBuilder descriptorBuilder = new ReleaseDescriptorBuilder();
         descriptorBuilder.setInteractive(settings.isInteractiveMode());
 
-        if (username == null || password == null) {
-            for (Server server : settings.getServers()) {
-                if (server.getId().equals(serverId)) {
-                    SettingsDecryptionRequest decryptionRequest = new DefaultSettingsDecryptionRequest(server);
-
-                    SettingsDecryptionResult decryptionResult = settingsDecrypter.decrypt(decryptionRequest);
-
-                    if (!decryptionResult.getProblems().isEmpty()) {
-                        // todo throw exception?
-                    }
-
-                    if (username == null) {
-                        username = decryptionResult.getServer().getUsername();
-                    }
-
-                    if (password == null) {
-                        password = decryptionResult.getServer().getPassword();
-                    }
-
-                    break;
-                }
-            }
-        }
-
         descriptorBuilder.setScmPassword(password);
         descriptorBuilder.setScmUsername(username);
-
+        // used for lookup of credentials from settings.xml in DefaultScmRepositoryConfigurator
+        descriptorBuilder.setScmId(serverId);
         descriptorBuilder.setWorkingDirectory(basedir.getAbsolutePath());
         descriptorBuilder.setLocalCheckout(localCheckout);
         descriptorBuilder.setScmSourceUrl(pubScmUrl);
@@ -371,8 +340,6 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         scmRepository = scmRepositoryConfigurator.getConfiguredRepository(releaseDescriptor, settings);
 
         scmProvider = scmRepositoryConfigurator.getRepositoryProvider(scmRepository);
-
-        return releaseDescriptor;
     }
 
     protected void checkoutExisting() throws MojoExecutionException {
