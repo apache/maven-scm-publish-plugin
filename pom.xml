@@ -28,7 +28,7 @@ under the License.
   </parent>
 
   <artifactId>maven-scm-publish-plugin</artifactId>
-  <version>3.2.2-SNAPSHOT</version>
+  <version>3.3.0</version>
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven SCM Publish Plugin</name>
@@ -46,7 +46,7 @@ under the License.
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-scm-publish-plugin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-scm-publish-plugin.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>maven-scm-publish-plugin-3.3.0</tag>
     <url>https://github.com/apache/maven-scm-publish-plugin/tree/${project.scm.tag}</url>
   </scm>
   <issueManagement>
@@ -73,7 +73,7 @@ under the License.
     <antrunPluginVersion>3.1.0</antrunPluginVersion>
     <projectInfoReportsPluginVersion>3.6.0</projectInfoReportsPluginVersion>
     <javadocPluginVersion>3.7.0</javadocPluginVersion>
-    <project.build.outputTimestamp>2023-03-26T17:41:30Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2024-06-16T20:16:33Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
