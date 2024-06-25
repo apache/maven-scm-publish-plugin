@@ -1,18 +1,115 @@
+Here's an expanded version of your `.gitignore` file, which includes more common patterns and file types to ignore for various development environments, build tools, and operating systems:
+
+```gitignore
+# Directories
 target/
+bin/
+out/
+bootstrap/
+
+# Eclipse
 .project
 .classpath
 .settings/
-.svn/
-bin/
-# Intellij
+
+# IntelliJ
 *.ipr
 *.iml
-*~
-.idea
-out/
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# macOS
 .DS_Store
-/bootstrap
-/dependencies.xml
-.java-version
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.lnk
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.javadoc
+
+# Build Tools
+*.log
+*.lock
+dist/
+build/
+*.mvn/
+target/
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Composer (PHP)
+vendor/
+composer.lock
+
+# Environment Files
+.env
+.env.local
+.env.*.local
+.envrc
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Subversion
+.svn/
+
+# IDE Specific
 .checkstyle
 .factorypath
+
+# Other
+/dependencies.xml
+.java-version
+*~
+*#
+*#*#
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.rej
+*.sublime-project
+*.sublime-workspace
+*.idea/
+*.ipynb_checkpoints
+```
