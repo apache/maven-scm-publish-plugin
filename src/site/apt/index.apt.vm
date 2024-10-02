@@ -29,7 +29,7 @@
 ${project.name}
 
     The maven-scm-publish-plugin is a utility plugin to allow publishing Maven
-    website to any supported SCM.
+    website to any supported SCM (Source Code Management) repository (like Git).
     The primary goal was to have an utility plugin to allow Apache projects
     to publish Maven websites via the {{{https://infra.apache.org/project-site.html#tools}ASF svnpubsub system}}.
 
