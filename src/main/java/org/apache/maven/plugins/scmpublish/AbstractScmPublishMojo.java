@@ -143,18 +143,6 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     private String checkinComment;
 
     /**
-     * Patterns to exclude from the scm tree.
-     */
-    @Parameter
-    protected String excludes;
-
-    /**
-     * Patterns to include in the scm checkout.
-     */
-    @Parameter
-    protected String includes;
-
-    /**
      * List of SCM provider implementations.
      * Key is the provider type, eg. <code>cvs</code>.
      * Value is the provider implementation (the role-hint of the provider), eg. <code>cvs</code> or
@@ -393,7 +381,8 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         }
 
         try {
-            ScmFileSet fileSet = new ScmFileSet(checkoutDirectory, includes, excludes);
+            // only the baseDir is evaluated during update/checkout
+            ScmFileSet fileSet = new ScmFileSet(checkoutDirectory, null, null);
 
             ScmBranch branch = (scmBranch == null) ? null : new ScmBranch(scmBranch);
 
