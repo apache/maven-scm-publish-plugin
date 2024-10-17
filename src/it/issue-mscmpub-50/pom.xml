@@ -40,15 +40,15 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
-          <version>@sitePluginVersion@</version>
+          <version>4.1.0</version> <!-- Updated version -->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-scm-publish-plugin</artifactId>
-          <version>@project.version@</version>
+          <version>3.1.0</version> <!-- Updated version -->
           <configuration>
             <content>${project.reporting.outputDirectory}</content><!-- don't require site:stage -->
-            <skipDeployement>true</skipDeployement>
+            <skipDeployment>true</skipDeployment>
           </configuration>
         </plugin>
       </plugins>
@@ -57,7 +57,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-antrun-plugin</artifactId>
-        <version>@antrunPluginVersion@</version>
+        <version>3.0.0</version> <!-- Updated version -->
         <executions>
           <execution>
             <id>ln</id>
@@ -75,6 +75,27 @@
           </execution>
         </executions>
       </plugin>
+      <!-- Plugin to run the pre-check script -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version> <!-- Updated version -->
+        <executions>
+          <execution>
+            <id>check-commands</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>bash</executable>
+              <arguments>
+                <argument>${project.basedir}/check_commands.sh</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -83,7 +104,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>@projectInfoReportsPluginVersion@</version>
+        <version>3.4.1</version> <!-- Updated version -->
         <configuration>
           <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
@@ -92,7 +113,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>@javadocPluginVersion@</version>
+        <version>3.5.0</version> <!-- Updated version -->
         <configuration>
         </configuration>
       </plugin>
