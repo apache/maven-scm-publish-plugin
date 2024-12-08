@@ -18,6 +18,8 @@
  */
 package org.apache.maven.plugins.scmpublish;
 
+import javax.inject.Inject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +46,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.apache.maven.scm.manager.ScmManager;
+import org.apache.maven.shared.release.scm.ScmRepositoryConfigurator;
 import org.apache.maven.shared.utils.logging.MessageUtils;
 import org.codehaus.plexus.util.MatchPatterns;
 
@@ -75,8 +79,13 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
     private int files = 0;
     private long size = 0;
 
+    @Inject
+    public ScmPublishPublishScmMojo(ScmManager scmManager, ScmRepositoryConfigurator scmRepositoryConfigurator) {
+        super(scmManager, scmRepositoryConfigurator);
+    }
+
     /**
-     * Update scm checkout directory with content.
+     * Update SCM checkout directory with content.
      *
      * @param checkout        the scm checkout directory
      * @param dir             the content to put in scm (can be <code>null</code>)

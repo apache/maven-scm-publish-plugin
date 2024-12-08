@@ -36,7 +36,6 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.scm.CommandParameter;
 import org.apache.maven.scm.CommandParameters;
@@ -153,18 +152,6 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     private Map<String, String> providerImplementations;
 
     /**
-     * The SCM manager.
-     */
-    @Component
-    private ScmManager scmManager;
-
-    /**
-     * Tool that gets a configured SCM repository from release configuration.
-     */
-    @Component
-    protected ScmRepositoryConfigurator scmRepositoryConfigurator;
-
-    /**
      * The server id specified in the {@code settings.xml}, which should be used for the authentication.
      * @see <a href="https://maven.apache.org/settings.html#servers">Settings Reference</a>
      */
@@ -273,6 +260,21 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     protected ScmProvider scmProvider;
 
     protected ScmRepository scmRepository;
+
+    /**
+     * The SCM manager.
+     */
+    private final ScmManager scmManager;
+
+    /**
+     * Tool that gets a configured SCM repository from release configuration.
+     */
+    protected final ScmRepositoryConfigurator scmRepositoryConfigurator;
+
+    protected AbstractScmPublishMojo(ScmManager scmManager, ScmRepositoryConfigurator scmRepositoryConfigurator) {
+        this.scmManager = scmManager;
+        this.scmRepositoryConfigurator = scmRepositoryConfigurator;
+    }
 
     protected void logInfo(String format, Object... params) {
         getLog().info(String.format(format, params));
