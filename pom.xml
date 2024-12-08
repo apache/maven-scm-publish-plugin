@@ -141,6 +141,12 @@ under the License.
       <version>${scmVersion}</version>
     </dependency>
     <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+      <scope>Provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-providers-standard</artifactId>
       <version>${scmVersion}</version>
