@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.NameFileFilter;
 import org.apache.commons.io.filefilter.NotFileFilter;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -195,12 +194,10 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
      * @throws IOException
      */
     private void copyAndNormalizeNewlines(File srcFile, File destFile) throws IOException {
-        BufferedReader in = null;
-        PrintWriter out = null;
-        try {
-            in = new BufferedReader(new InputStreamReader(Files.newInputStream(srcFile.toPath()), siteOutputEncoding));
-            out = new PrintWriter(new OutputStreamWriter(Files.newOutputStream(destFile.toPath()), siteOutputEncoding));
-
+        try (BufferedReader in = new BufferedReader(
+                        new InputStreamReader(Files.newInputStream(srcFile.toPath()), siteOutputEncoding));
+                PrintWriter out = new PrintWriter(
+                        new OutputStreamWriter(Files.newOutputStream(destFile.toPath()), siteOutputEncoding))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 if (in.ready()) {
                     out.println(line);
@@ -208,14 +205,6 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
                     out.print(line);
                 }
             }
-
-            out.close();
-            out = null;
-            in.close();
-            in = null;
-        } finally {
-            IOUtils.closeQuietly(out);
-            IOUtils.closeQuietly(in);
         }
     }
 
@@ -263,7 +252,7 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
                     updateDirectory,
                     content,
                     (project == null) ? null : project.getModel().getModules());
-            String displaySize = org.apache.commons.io.FileUtils.byteCountToDisplaySize(size);
+            String displaySize = FileUtils.byteCountToDisplaySize(size);
             logInfo(
                     "Content consists of " + MessageUtils.buffer().strong("%d directories and %d files = %s"),
                     directories,
