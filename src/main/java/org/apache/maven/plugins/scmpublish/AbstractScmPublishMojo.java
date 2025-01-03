@@ -109,7 +109,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     protected String subDirectory;
 
     /**
-     * If set to {@true} displays list of added, deleted, and changed files, but does not do any actual SCM operations.
+     * If set to {@code true} displays list of added, deleted, and changed files, but does not do any actual SCM operations.
      */
     @Parameter(property = "scmpublish.dryRun")
     private boolean dryRun;
