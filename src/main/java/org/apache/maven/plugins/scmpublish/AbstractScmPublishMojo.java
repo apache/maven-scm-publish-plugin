@@ -136,6 +136,13 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     private boolean skipCheckin;
 
     /**
+     * Push changes to the upstream remote repository during commit (only affects distributed SCMs like Git).
+     * @since 3.4.0
+     */
+    @Parameter(property = "scmpublish.pushChanges", defaultValue = "true")
+    private boolean pushChanges;
+
+    /**
      * SCM log/checkin comment for this publication.
      */
     @Parameter(property = "scmpublish.checkinComment", defaultValue = "Site checkin for project ${project.name}")
@@ -331,7 +338,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         descriptorBuilder.setWorkingDirectory(basedir.getAbsolutePath());
         descriptorBuilder.setLocalCheckout(localCheckout);
         descriptorBuilder.setScmSourceUrl(pubScmUrl);
-
+        descriptorBuilder.setPushChanges(pushChanges);
         if (providerImplementations != null) {
             for (Map.Entry<String, String> providerEntry : providerImplementations.entrySet()) {
                 logInfo(
@@ -343,7 +350,8 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
 
         ReleaseDescriptor releaseDescriptor = descriptorBuilder.build();
         scmRepository = scmRepositoryConfigurator.getConfiguredRepository(releaseDescriptor, settings);
-
+        // set pushChanges afterwards due to https://issues.apache.org/jira/browse/MRELEASE-1160
+        scmRepository.getProviderRepository().setPushChanges(pushChanges);
         scmProvider = scmRepositoryConfigurator.getRepositoryProvider(scmRepository);
     }
 
