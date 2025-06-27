@@ -60,7 +60,7 @@ import org.codehaus.plexus.util.MatchPatterns;
 public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
     /**
      * The path of the directory containing the content to be published.
-     * The is published recursively (i.e. including subdirectories).
+     * The is published recursively (i.e. including subdirectories). foo
      */
     @Parameter(property = "scmpublish.content", defaultValue = "${project.build.directory}/staging")
     private File content;
