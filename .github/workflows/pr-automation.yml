@@ -24,6 +24,7 @@ on:
       - reopened
       - edited
       - ready_for_review
+      - closed
 
 jobs:
   pr-automation:
