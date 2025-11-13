@@ -74,6 +74,7 @@ under the License.
     <projectInfoReportsPluginVersion>3.6.0</projectInfoReportsPluginVersion>
     <javadocPluginVersion>3.7.0</javadocPluginVersion>
     <project.build.outputTimestamp>2024-06-16T20:16:56Z</project.build.outputTimestamp>
+    <version.palantirJavaFormat>2.81.0</version.palantirJavaFormat>
   </properties>
 
   <dependencies>
