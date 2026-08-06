@@ -1,42 +1,31 @@
- ------
- Importing maven.apache.org Content to Svn
- ------
- Hervé Boutemy
- ------
- 2012-08-19
- ------
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
-~~ Licensed to the Apache Software Foundation (ASF) under one
-~~ or more contributor license agreements.  See the NOTICE file
-~~ distributed with this work for additional information
-~~ regarding copyright ownership.  The ASF licenses this file
-~~ to you under the Apache License, Version 2.0 (the
-~~ "License"); you may not use this file except in compliance
-~~ with the License.  You may obtain a copy of the License at
-~~
-~~   http://www.apache.org/licenses/LICENSE-2.0
-~~
-~~ Unless required by applicable law or agreed to in writing,
-~~ software distributed under the License is distributed on an
-~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-~~ KIND, either express or implied.  See the License for the
-~~ specific language governing permissions and limitations
-~~ under the License.
+http://www.apache.org/licenses/LICENSE-2.0
 
-~~ NOTE: For help with the syntax of this file, see:
-~~ http://maven.apache.org/doxia/references/apt-format.html
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
 
-Importing maven.apache.org Content to Svn
+# Importing maven.apache.org Content to Svn
 
-  This plugin has been created to enable conversion of Maven components documentation
-  to Apache CMS, based on svnpubsub: see {{{http://www.apache.org/dev/cms.html}documentation}}.
+This plugin has been created to enable conversion of Maven components documentation to Apache CMS, based on svnpubsub: see [documentation](http://www.apache.org/dev/cms.html).
 
-  Once new content can be published with the plugin, existing content needs to be imported.
+Once new content can be published with the plugin, existing content needs to be imported.
 
-  A little shell script has been used to import a component with all its versions independently of
-  any site generation phase or components' pom.xml:
+A little shell script has been used to import a component with all its versions independently of any site generation phase or components' pom.xml:
 
-+--------
+```unknown
 # configuration
 ORIG_PATH=/www/maven.apache.org
 DEST_SVN_BASE=https://svn.apache.org/repos/infra/websites/production/maven/content
@@ -44,7 +33,6 @@ DEST_SVN_BASE=https://svn.apache.org/repos/infra/websites/production/maven/conte
 ARTIFACT=maven-clean-plugin
 DIR=plugins/${ARTIFACT}
 VERSIONS="2.3 2.4 2.4.1 2.5"
-
 
 # initialize ${DIR}-LATEST entry in svn
 svn -m "prepare ${ARTIFACT} documentation publication" mkdir ${DEST_SVN_BASE}/${DIR}-LATEST
@@ -62,5 +50,4 @@ do
   svn cp ${DEST_SVN_BASE}/${DIR}-LATEST ${DEST_SVN_BASE}/${DIR}-${VERSION} -m "releasing ${ARTIFACT} ${VERSION} documentation"
 
 done
-+--------
- 
+```

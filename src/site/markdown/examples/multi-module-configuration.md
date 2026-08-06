@@ -1,55 +1,42 @@
- ------
- Maven Multi Module Configuration
- ------
- Olivier Lamy
- Hervé Boutemy
- ------
- 2012-12-06
- ------
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
-~~ Licensed to the Apache Software Foundation (ASF) under one
-~~ or more contributor license agreements.  See the NOTICE file
-~~ distributed with this work for additional information
-~~ regarding copyright ownership.  The ASF licenses this file
-~~ to you under the Apache License, Version 2.0 (the
-~~ "License"); you may not use this file except in compliance
-~~ with the License.  You may obtain a copy of the License at
-~~
-~~   http://www.apache.org/licenses/LICENSE-2.0
-~~
-~~ Unless required by applicable law or agreed to in writing,
-~~ software distributed under the License is distributed on an
-~~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-~~ KIND, either express or implied.  See the License for the
-~~ specific language governing permissions and limitations
-~~ under the License.
+http://www.apache.org/licenses/LICENSE-2.0
 
-~~ NOTE: For help with the syntax of this file, see:
-~~ http://maven.apache.org/doxia/references/apt-format.html
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
 
-Maven Multi Module Configuration
+# Maven Multi Module Configuration
 
-  With a multi modules build, you cannot simply use <<<mvn site-deploy>>>: you must stage your site first.
+With a multi modules build, you cannot simply use `mvn site-deploy`: you must stage your site first.
 
-  Cli commands to use:
+Cli commands to use:
 
-+------------+
+```shell
 mvn -Preporting site site:stage
 mvn scm-publish:publish-scm
-+------------+
+```
 
-  These commands work well with mono-module too, even if mono-module could permit some optimizations (everything can be run
-  in only one Maven invocation).
+These commands work well with mono-module too, even if mono-module could permit some optimizations (everything can be run in only one Maven invocation).
 
-* Avoiding Extra Path During Staging
+## Avoiding Extra Path During Staging
 
-  When staging the site, sometimes extra directories may appear between <<<target/staging>>> and the effective root of the site:
-  this is caused by the auto-detection algorithm of site root, which cannot detect at which level to stop.
+When staging the site, sometimes extra directories may appear between `target/staging` and the effective root of the site: this is caused by the auto-detection algorithm of site root, which cannot detect at which level to stop.
 
-  This can be fixed by configuring the {{{/plugins/maven-site-plugin/stage-mojo.html#topSiteURL}site plugin's topSiteURL parameter}}
-  (added in version 3.3) with top distribution management site url in a parent pom:
+This can be fixed by configuring the [site plugin's topSiteURL parameter](/plugins/maven-site-plugin/stage-mojo.html#topSiteURL) (added in version 3.3) with top distribution management site url in a parent pom:
 
-+-----+
+```xml
   <distributionManagement>
     <site>
       <id>site</id>
@@ -69,4 +56,4 @@ mvn scm-publish:publish-scm
       </plugins>
     </pluginManagement>
   </build>
-+-----+
+```
