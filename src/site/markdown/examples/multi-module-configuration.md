@@ -1,3 +1,11 @@
+---
+title: Maven Multi Module Configuration
+author: 
+  - Olivier Lamy
+  - Hervé Boutemy
+date: 2012-12-06
+---
+
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
