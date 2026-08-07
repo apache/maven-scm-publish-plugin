@@ -1,3 +1,10 @@
+---
+title: Importing maven.apache.org Content to Svn
+author: 
+  - Hervé Boutemy
+date: 2012-08-19
+---
+
 <!--
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
