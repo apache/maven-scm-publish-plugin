@@ -66,7 +66,7 @@ under the License.
 
   <properties>
     <javaVersion>8</javaVersion>
-    <mavenVersion>3.6.3</mavenVersion>
+    <mavenVersion>3.9.16</mavenVersion>
     <scmVersion>2.2.1</scmVersion>
     <releasePluginVersion>${version.maven-release-plugin}</releasePluginVersion>
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
