@@ -54,9 +54,7 @@ import org.apache.maven.scm.provider.svn.repository.SvnScmProviderRepository;
 import org.apache.maven.scm.repository.ScmRepository;
 import org.apache.maven.scm.repository.ScmRepositoryException;
 import org.apache.maven.settings.Settings;
-import org.apache.maven.shared.release.config.ReleaseDescriptor;
-import org.apache.maven.shared.release.config.ReleaseDescriptorBuilder;
-import org.apache.maven.shared.release.scm.ScmRepositoryConfigurator;
+import org.apache.maven.settings.crypto.SettingsDecrypter;
 import org.apache.maven.shared.utils.logging.MessageUtils;
 
 /**
@@ -274,13 +272,13 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
     private final ScmManager scmManager;
 
     /**
-     * Tool that gets a configured SCM repository from release configuration.
+     * Decrypts the passwords and passphrases found in the {@code settings.xml}.
      */
-    protected final ScmRepositoryConfigurator scmRepositoryConfigurator;
+    private final SettingsDecrypter settingsDecrypter;
 
-    protected AbstractScmPublishMojo(ScmManager scmManager, ScmRepositoryConfigurator scmRepositoryConfigurator) {
+    protected AbstractScmPublishMojo(ScmManager scmManager, SettingsDecrypter settingsDecrypter) {
         this.scmManager = scmManager;
-        this.scmRepositoryConfigurator = scmRepositoryConfigurator;
+        this.settingsDecrypter = settingsDecrypter;
     }
 
     protected void logInfo(String format, Object... params) {
@@ -328,17 +326,6 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             logInfo("Performing a LOCAL checkout from " + scmUrl);
         }
 
-        ReleaseDescriptorBuilder descriptorBuilder = new ReleaseDescriptorBuilder();
-        descriptorBuilder.setInteractive(settings.isInteractiveMode());
-
-        descriptorBuilder.setScmPassword(password);
-        descriptorBuilder.setScmUsername(username);
-        // used for lookup of credentials from settings.xml in DefaultScmRepositoryConfigurator
-        descriptorBuilder.setScmId(serverId);
-        descriptorBuilder.setWorkingDirectory(basedir.getAbsolutePath());
-        descriptorBuilder.setLocalCheckout(localCheckout);
-        descriptorBuilder.setScmSourceUrl(pubScmUrl);
-        descriptorBuilder.setPushChanges(pushChanges);
         if (providerImplementations != null) {
             for (Map.Entry<String, String> providerEntry : providerImplementations.entrySet()) {
                 logInfo(
@@ -348,11 +335,10 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             }
         }
 
-        ReleaseDescriptor releaseDescriptor = descriptorBuilder.build();
-        scmRepository = scmRepositoryConfigurator.getConfiguredRepository(releaseDescriptor, settings);
-        // set pushChanges afterwards due to https://issues.apache.org/jira/browse/MRELEASE-1160
-        scmRepository.getProviderRepository().setPushChanges(pushChanges);
-        scmProvider = scmRepositoryConfigurator.getRepositoryProvider(scmRepository);
+        scmRepository = new ScmRepositoryFactory(getLog(), scmManager, settingsDecrypter)
+                .getConfiguredRepository(
+                        pubScmUrl, serverId, username, password, pushChanges, settings.isInteractiveMode(), settings);
+        scmProvider = scmManager.getProviderByRepository(scmRepository);
     }
 
     protected void checkoutExisting() throws MojoExecutionException {

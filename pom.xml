@@ -68,7 +68,6 @@ under the License.
     <javaVersion>8</javaVersion>
     <mavenVersion>3.9.16</mavenVersion>
     <scmVersion>2.2.1</scmVersion>
-    <releasePluginVersion>${version.maven-release-plugin}</releasePluginVersion>
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
     <antrunPluginVersion>${version.maven-antrun-plugin}</antrunPluginVersion>
     <projectInfoReportsPluginVersion>${version.maven-project-info-reports-plugin}</projectInfoReportsPluginVersion>
@@ -77,16 +76,6 @@ under the License.
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.apache.maven.release</groupId>
-      <artifactId>maven-release-api</artifactId>
-      <version>${releasePluginVersion}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.release</groupId>
-      <artifactId>maven-release-manager</artifactId>
-      <version>${releasePluginVersion}</version>
-    </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-model</artifactId>
@@ -102,6 +91,12 @@ under the License.
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-settings</artifactId>
+      <version>${mavenVersion}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-settings-builder</artifactId>
       <version>${mavenVersion}</version>
       <scope>provided</scope>
     </dependency>
@@ -156,6 +151,12 @@ under the License.
     </dependency>
     <dependency>
       <groupId>org.apache.maven.scm</groupId>
+      <artifactId>maven-scm-manager-plexus</artifactId>
+      <version>${scmVersion}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-svn-commons</artifactId>
       <version>${scmVersion}</version>
     </dependency>
@@ -163,6 +164,11 @@ under the License.
       <groupId>org.apache.maven.scm</groupId>
       <artifactId>maven-scm-provider-svntest</artifactId>
       <version>${scmVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
