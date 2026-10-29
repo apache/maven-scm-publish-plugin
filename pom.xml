@@ -67,6 +67,7 @@ under the License.
   <properties>
     <mavenVersion>3.9.16</mavenVersion>
     <scmVersion>2.2.1</scmVersion>
+    <minaSshdVersion>2.20.0</minaSshdVersion>
     <releasePluginVersion>${version.maven-release-plugin}</releasePluginVersion>
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
     <antrunPluginVersion>${version.maven-antrun-plugin}</antrunPluginVersion>
@@ -74,6 +75,22 @@ under the License.
     <javadocPluginVersion>${version.maven-javadoc-plugin}</javadocPluginVersion>
     <project.build.outputTimestamp>2024-06-16T20:16:56Z</project.build.outputTimestamp>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- JGit 5.13 (via the maven-scm JGit provider) pulls in Apache MINA SSHD 2.7.0, which has known vulnerabilities -->
+      <dependency>
+        <groupId>org.apache.sshd</groupId>
+        <artifactId>sshd-sftp</artifactId>
+        <version>${minaSshdVersion}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.sshd</groupId>
+        <artifactId>sshd-osgi</artifactId>
+        <version>${minaSshdVersion}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
