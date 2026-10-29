@@ -54,8 +54,8 @@ under the License.
     <url>https://github.com/apache/maven-scm-publish-plugin/issues</url>
   </issueManagement>
   <ciManagement>
-    <system>Jenkins</system>
-    <url>https://ci-builds.apache.org/job/Maven/job/maven-box/job/maven-scm-publish-plugin/</url>
+    <system>GitHub</system>
+    <url>https://github.com/apache/maven-scm-publish-plugin/actions</url>
   </ciManagement>
   <distributionManagement>
     <site>
