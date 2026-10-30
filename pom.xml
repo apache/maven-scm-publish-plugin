@@ -67,7 +67,7 @@ under the License.
   <properties>
     <mavenVersion>3.9.16</mavenVersion>
     <scmVersion>2.2.1</scmVersion>
-    <minaSshdVersion>2.20.0</minaSshdVersion>
+    <minaSshdVersion>2.20.1</minaSshdVersion>
     <releasePluginVersion>${version.maven-release-plugin}</releasePluginVersion>
     <sitePluginVersion>${version.maven-site-plugin}</sitePluginVersion>
     <antrunPluginVersion>${version.maven-antrun-plugin}</antrunPluginVersion>
