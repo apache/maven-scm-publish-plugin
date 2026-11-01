@@ -31,7 +31,7 @@ URL format
 
 You must use a scm url format:
 
-```unknown
+```text
   scm:<scm_provider><delimiter><provider_specific_part>
 ```
 
