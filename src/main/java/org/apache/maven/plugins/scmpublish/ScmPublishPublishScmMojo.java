@@ -217,6 +217,7 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
         }
     }
 
+    @Override
     public void scmPublishExecute() throws MojoExecutionException, MojoFailureException {
         if (siteOutputEncoding == null) {
             getLog().warn("No output encoding, defaulting to UTF-8.");
