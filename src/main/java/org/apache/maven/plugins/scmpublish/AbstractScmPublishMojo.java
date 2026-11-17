@@ -364,7 +364,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         logInfo(
                 MessageUtils.buffer().strong("%s") + " the pub tree from "
                         + MessageUtils.buffer().strong("%s") + " into %s",
-                (tryUpdate ? "Updating" : "Checking out"),
+                tryUpdate ? "Updating" : "Checking out",
                 pubScmUrl,
                 checkoutDirectory);
 
@@ -394,7 +394,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
             // only the baseDir is evaluated during update/checkout
             ScmFileSet fileSet = new ScmFileSet(checkoutDirectory, null, null);
 
-            ScmBranch branch = (scmBranch == null) ? null : new ScmBranch(scmBranch);
+            ScmBranch branch = scmBranch == null ? null : new ScmBranch(scmBranch);
 
             ScmResult scmResult = null;
             if (tryUpdate && !forceCheckout) {

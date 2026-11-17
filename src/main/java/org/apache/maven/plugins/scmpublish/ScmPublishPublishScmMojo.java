@@ -99,7 +99,7 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
                 : checkout.list();
 
         Set<String> checkoutContent = new HashSet<>(Arrays.asList(files));
-        List<String> dirContent = (dir != null) ? Arrays.asList(dir.list()) : Collections.emptyList();
+        List<String> dirContent = dir != null ? Arrays.asList(dir.list()) : Collections.emptyList();
 
         Set<String> deleted = new HashSet<>(checkoutContent);
         deleted.removeAll(dirContent);
@@ -260,7 +260,7 @@ public class ScmPublishPublishScmMojo extends AbstractScmPublishMojo {
             update(
                     updateDirectory,
                     content,
-                    (project == null) ? null : project.getModel().getModules());
+                    project == null ? null : project.getModel().getModules());
             String displaySize = FileUtils.byteCountToDisplaySize(size);
             logInfo(
                     "Content consists of " + MessageUtils.buffer().strong("%d directories and %d files = %s"),
