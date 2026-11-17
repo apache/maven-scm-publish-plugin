@@ -482,6 +482,7 @@ public abstract class AbstractScmPublishMojo extends AbstractMojo {
         }
     }
 
+    @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (skipDeployment || skipDeployement) {
             getLog().info("scmpublish.skipDeploy = true: Skipping site deployment");
