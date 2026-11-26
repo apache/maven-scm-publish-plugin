@@ -175,18 +175,6 @@ under the License.
       <artifactId>maven-scm-provider-svn-commons</artifactId>
       <version>${scmVersion}</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.maven.scm</groupId>
-      <artifactId>maven-scm-provider-svntest</artifactId>
-      <version>${scmVersion}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
   </dependencies>
 
   <profiles>
