@@ -17,9 +17,15 @@
  * under the License.
  */
 
-import java.io.*;
-import org.apache.maven.scm.provider.svn.SvnScmTestUtils;
+import java.nio.file.Files
 
-SvnScmTestUtils.initializeRepository( new File( basedir, "target/svn-root" ) );
+def repo = new File( basedir, "target/svn-root" )
+repo.deleteDir()
+Files.createDirectories( repo.parentFile.toPath() )
 
-return true;
+def proc = [ "svnadmin", "create", repo.absolutePath ].execute()
+def out = new StringBuffer()
+proc.consumeProcessOutput( out, out )
+assert proc.waitFor() == 0 : "svnadmin create failed: " + out
+
+return true
